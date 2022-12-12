@@ -319,9 +319,12 @@ currency = {"AZN": 35.68,
             "USD": 60.66,
             "UZS": 0.0055, }
 
-file_name = input("Введите название файла: ")
-profession = input("Введите название профессии: ")
-dataset = DataSet(file_name, profession)
-dataset.print_info()
-Report(dataset).generate_image()
+def get_pdf_statistic(file_name, profession):
+    file_name = input("Введите название файла: ")
+    profession = input("Введите название профессии: ")
+    dataset = DataSet(file_name, profession)
+    dataset.print_info()
+    Report(dataset).generate_image()
+
+
 
