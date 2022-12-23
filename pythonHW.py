@@ -1,13 +1,14 @@
-import matplotlib.pyplot as plt
-import numpy as np
 import csv
 from operator import itemgetter
+
+import matplotlib.pyplot as plt
+import numpy as np
 import openpyxl
-from openpyxl.styles import Font, Border, Side
-from openpyxl.utils import get_column_letter
-from openpyxl.styles.numbers import FORMAT_PERCENTAGE_00, FORMAT_NUMBER_00
-from jinja2 import Environment, FileSystemLoader
 import pdfkit
+from jinja2 import Environment, FileSystemLoader
+from openpyxl.styles import Font, Border, Side
+from openpyxl.styles.numbers import FORMAT_PERCENTAGE_00
+from openpyxl.utils import get_column_letter
 
 
 def csv_reader():
@@ -98,6 +99,10 @@ def take_ten_items(dictionary):
                    dictionary (dict): словарь
         Returns:
                   (dict): новый словарь из 10 элементов
+    >>> take_ten_items({"a": 1, "b": 3, "c": 4, "d": 0.7, "e": 6, "f": 7,"g": 8, "h": 9, "i": 10, "j": 11, "k": 12, "l": 13.7, "m": 20})
+    {'a': 1, 'b': 3, 'c': 4, 'd': 0.7, 'e': 6, 'f': 7, 'g': 8, 'h': 9, 'i': 10, 'j': 11}
+    >>> take_ten_items({'a': 1, 'b': 3, 'c': 4, 'd': 0.7, 'e': 6})
+    {'a': 1, 'b': 3, 'c': 4, 'd': 0.7, 'e': 6}
     """
     new_dictionary = {}
     i = 0
@@ -231,6 +236,16 @@ class Vacancy:
         """Инициализируект объект Vacancy
                Args:
                    dictionary (dict): словарь
+        >>> type(Vacancy({"name": "Аналитик", "salary_from": 10000, "salary_to": 100000, "salary_currency": "RUR", "area_name": "Москва",  "published_at": "2022-07-05T18:19:30+0300"})).__name__
+        'Vacancy'
+        >>> Vacancy({"name": "Аналитик", "salary_from": 10000, "salary_to": 100000, "salary_currency": "RUR", "area_name": "Москва",  "published_at": "2022-07-05T18:19:30+0300"}).name
+        'Аналитик'
+        >>> Vacancy({"name": "Аналитик", "salary_from": 10000, "salary_to": 100000, "salary_currency": "RUR", "area_name": "Москва",  "published_at": "2022-07-05T18:19:30+0300"}).area_name
+        'Москва'
+        >>> Vacancy({"name": "Аналитик", "salary_from": 10000, "salary_to": 100000, "salary_currency": "RUR", "area_name": "Москва",  "published_at": "2022-07-05T18:19:30+0300"}).salary
+        55000.0
+        >>> Vacancy({"name": "Аналитик", "salary_from": 10000, "salary_to": 100000, "salary_currency": "RUR", "area_name": "Москва",  "published_at": "2022-07-05T18:19:30+0300"}).published_at
+        2022
         """
         self.name = dictionary["name"]
         self.salary = (float(dictionary["salary_from"]) + float(dictionary["salary_to"])) / 2 * currency[
