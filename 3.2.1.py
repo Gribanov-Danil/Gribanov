@@ -2,12 +2,19 @@ import csv
 
 
 class Csv_cutter_by_years:
+    """ Парсит csv'шку на csv'шки по годам
+        Attributes:
+            file_name (string): название файла для парсинга
+            headers (list): заголовки таблицы
+            info (dict): данные
+        """
     def __init__(self, file_name):
         self.file_name = file_name
         self.headers = []
         self.info = {}
 
-    def separate_csv(self):
+    def parses_csv(self):
+        """Парсит csv'шки по годам"""
         for year in self.info:
             with open(f'csv_files/new_csv_{year}.csv', 'w', newline='', encoding="utf-8-sig") as csvfile:
                 filewriter = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -15,6 +22,7 @@ class Csv_cutter_by_years:
                     filewriter.writerow(row)
 
     def read_file(self):
+        """Читает основную csv'шку"""
         flag = True
         with open(self.file_name, encoding="utf-8-sig") as File:
             reader_obj = csv.reader(File)
@@ -32,4 +40,4 @@ class Csv_cutter_by_years:
 name = input("Введите название файла для парсинга по годам: ")
 cutter = Csv_cutter_by_years(name)
 cutter.read_file()
-cutter.separate_csv()
+cutter.parses_csv()
