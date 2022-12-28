@@ -2,7 +2,8 @@ from stats import *
 import pandas as pd
 import json
 
-format_month = lambda month: str(month) if month >= 10 else f'0{month}'
+def format_month(month):
+    return str(month) if month >= 10 else f'0{month}'
 
 with open('currency_by_years.json', 'r') as file:
     json_file = json.load(file)
