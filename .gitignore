@@ -1,3 +1,6 @@
 /.idea
 /venv
 /path/to/vacancies.csv
+/djangoProject/venv/
+/djangoProject/venv/Lib/
+/djangoProject/venv/Scripts/
